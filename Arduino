@@ -1,0 +1,137 @@
+// Αρχικά συνδέουμε :           *  το pin 2 του μικροελεγκτή Arduino Uno R3 στο TX pin του Gsm Module
+//                              *  το pin 3 του μικροελεγκτή Arduino Uno R3 στο RX pin του Gsm Module
+
+#include "SIM900.h"         // Βιβλιοθήκη για τον έλεγχο του GSM MODULE.
+#include <SoftwareSerial.h> // Βιβλιοθήκη για την λειτουργία τησ σειριακής οθόνης
+#include "sms.h"            // Βιβλιοθήκη για την διαχείρηση των SMS στο Gsm Module
+
+int numdata;
+boolean started=false;
+  SMSGSM sms;
+  char message[160];
+  char phone_number[20];
+  char inSerial[50];
+  char position;
+
+int air    = 7;  // Ορίζουμε το Pin 7 ως air condition
+int lights = 8;  // Ορίζουμε το Pin 8 ως lights
+int tv     = 9;  // Ορίζουμε το Pin 9 ως tv
+int door   = 10; // Ορίζουμε το Pin 10 ως door
+
+void setup() 
+{
+     Serial.begin(9600); //Ορισμός του baudrate της σειριακής οθόνης
+     Serial.println("Home Automation EuDe 2018");
+
+//Αρχικοποίηση των ρελέ και των pins στα οποία είναι συνδεδεμένα πάνω στον μικροελεγκτή Arduino
+
+     pinMode(air, OUTPUT);      // Ορίζουμε το pin 7 ώς pin εξόδου
+     digitalWrite(air, HIGH);
+     
+     pinMode(lights, OUTPUT);   // Ορίζουμε το pin 8 ώς pin εξόδου
+     digitalWrite(lights, HIGH);
+     
+     pinMode(tv, OUTPUT);       // Ορίζουμε το pin 9 ώς pin εξόδου
+     digitalWrite(tv, HIGH);
+  
+     pinMode(door, OUTPUT);     // Ορίζουμε το pin 10 ώς pin εξόδου
+     digitalWrite(door, HIGH);
+
+   
+// Αρχικοποιούμε την σύνδεση GSM ρυθμίζοντας το Baudrate και ενημερώνοντασ μασ για την κατάστασή του
+  
+  if ( gsm.begin(9600) )
+     {
+     Serial.println("Sim900A status = Ready!");
+     started=true;  
+     }
+  else 
+     Serial.print("Sim900A status = Error!");
+};
+
+//Αρχή του block επανάληψης
+
+void loop() 
+{
+  if (started)
+  {
+    position = sms.IsSMSPresent(SMS_ALL); // Έλεγχος  για τυχόν αδιάβαστα ή νέα μηνύματα
+    if (position) 
+    {
+      // Ανάγνωση του μηνύματος SMS και καθορισμός του αποστολέα
+      sms.GetSMS(position, phone_number, message, 160);
+
+
+//Προσθαφαίρεση ή αλλαγή αποστολέα, στον οποίο επιτρέπεται να στείλει μηνύματα
+  if ((strcmp(phone_number,"+306986909533")==0))
+  {
+       Serial.print("Income Message from: "+String(phone_number)+String(" with the message: ") + String(message));
+   }
+//'Ελεγχος περιεχομένου μηνύματος, αν είναι κάποια εντολή ή όχι  
+      if (strcmp(message,"Open door")==0)
+      {
+         digitalWrite(door, LOW); // Ενεργοποιεί το relay του pin 10 και ανοίγει την Πόρτα
+         Serial.print(" => Ανοίγω την Πόρτα!");
+      }
+      else if (strcmp(message,"Close door")==0)
+      {
+         digitalWrite(door, HIGH); //Απενεργοποιεί το relay του pin 10 και κλείνει την Πόρτα
+         Serial.print(" => Κλείνω την Πόρτα!");
+      }
+
+      else if (strcmp(message,"Open lights")==0)
+      {
+         digitalWrite(tv, LOW); // Ενεργοποιεί το relay του pin 9 και ανοίγει τα Φώτα
+         Serial.print(" => Ανοίγω την τηλεόραση!");
+      }
+      else if (strcmp(message,"Close lights")==0)
+      {
+         digitalWrite(tv, HIGH); //Απενεργοποιεί το relay του pin 9 και κλείνει τα Φώτα!
+         Serial.print(" => Κλείνω ην τηλεόραση!");
+      }
+       else if (strcmp(message,"Open tv")==0)
+      {
+         digitalWrite(lights, LOW); // Ενεργοποιεί το relay του pin 7 και ανοίγει την τηλεόραση
+         Serial.println(" => Ανοίγω τα φώτα!");
+      }
+       else if (strcmp(message,"Close tv")==0)
+      {
+         digitalWrite(lights, HIGH); //Απενεργοποιεί το relay του pin 7 και κλείνει την τηλεόραση
+         Serial.print(" => Κλείνω τα φώτα!");
+      }
+
+      else if (strcmp(message,"Open air")==0)
+      {
+         digitalWrite(air, LOW); // Ενεργοποιεί το relay του pin 8 και ανοίγει το air condition
+         Serial.print(" => Ανοίγω το Air Condition!");
+      }
+       else if (strcmp(message,"Close air")==0)
+      {
+         digitalWrite(air, HIGH); //Απενεργοποιεί το relay του pin 8 και κλείνει το air condition
+         Serial.print(" => Κλείνω το Air Condition!");
+      }
+      else if(strcmp(message,"Open all")==0) //Ανοίγω όλες τις συσκευές μαζί
+      {
+         digitalWrite(door, LOW);
+         digitalWrite(tv, LOW);
+         digitalWrite(lights, LOW);
+         digitalWrite(air, LOW);
+         Serial.print(" => Ανοίγω όλες τισ συσκευές!");
+      }
+      else if(strcmp(message,"Close all")==0) //Ανοίγω όλες τις συσκευές μαζί
+      {  
+        digitalWrite(door, HIGH);
+        digitalWrite(tv, HIGH);
+        digitalWrite(lights, HIGH);
+        digitalWrite(air, HIGH);
+        Serial.print(" * Κλείνω όλες τισ συσκευές!");
+      }
+      else
+      {
+       Serial.print(" => Άγνωστος Αποστολέας!");
+      }
+     sms.DeleteSMS(position); // Διαγραφή του νέου αναγνωσμένου μηνύματος
+    }
+      delay(2000);
+    }
+  } ;
