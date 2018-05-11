@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/air_layout"
+    android:background="@drawable/b18"
+    android:layout_height="match_parent"
+    tools:context=".Air_Condition">
+
+
+    <ImageView
+        android:id="@+id/air_logo"
+        android:layout_width="328dp"
+        android:layout_height="248dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/aircondition_on" />
+
+    <ImageView
+        android:id="@+id/air_log"
+        android:layout_width="273dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/air_t" />
+
+
+    <net.colindodd.toggleimagebutton.ToggleImageButton
+        xmlns:tib="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/air_btn"
+        android:layout_width="78dp"
+        android:layout_height="73dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        tib:tib_drawable_off="@drawable/wid_off"
+        tib:tib_drawable_on="@drawable/wid_on" />
+
+</LinearLayout>

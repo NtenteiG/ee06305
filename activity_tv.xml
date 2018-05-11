@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/tv_layout"
+    android:layout_height="match_parent"
+    android:background="@drawable/b71"
+    tools:context=".Tv">
+
+    <ImageView
+        android:layout_width="281dp"
+        android:layout_height="348dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:src="@drawable/table1" />
+
+    <ImageView
+        android:id="@+id/tv_logo"
+        android:layout_width="241dp"
+        android:layout_height="196dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/tv_on"
+        tools:layout_editor_absoluteY="36dp" />
+
+    <ImageView
+        android:id="@+id/tv_t"
+        android:layout_width="128dp"
+        android:layout_height="96dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="171dp"
+        android:src="@drawable/tv_t" />
+
+    <net.colindodd.toggleimagebutton.ToggleImageButton
+        xmlns:tib="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tv_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        tib:layout_constraintEnd_toEndOf="parent"
+        tib:layout_constraintHorizontal_bias="0.498"
+        tib:layout_constraintStart_toStartOf="parent"
+        tib:tib_drawable_off="@drawable/b_off"
+        tib:tib_drawable_on="@drawable/b_on"
+        tools:layout_editor_absoluteY="524dp" />
+
+</RelativeLayout>

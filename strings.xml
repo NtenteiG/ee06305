@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SMS Home Automation</string>
+    <string name="user">Username</string>
+    <string name="phone">Phonenumber</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_tvv">Tvv</string>
+</resources>
