@@ -1,2 +1,0 @@
-# EuDe
-GSM Home Automation
