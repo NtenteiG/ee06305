@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/door_layout"
+    android:layout_height="match_parent"
+    android:background="@drawable/b41"
+    tools:context="ntentei.final_sms.Door">
+
+    <ImageView
+        android:id="@+id/door_logo1"
+        android:layout_width="209dp"
+        android:layout_height="240dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/door6"
+        android:contentDescription="TODO" />
+
+    <net.colindodd.toggleimagebutton.ToggleImageButton
+        xmlns:tib="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/lock"
+        android:layout_width="104dp"
+        android:layout_height="96dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        tib:tib_drawable_off="@drawable/d3"
+        tib:tib_drawable_on="@drawable/d4" />
+
+
+    <ImageView
+        android:id="@+id/doorlog"
+        android:layout_width="194dp"
+        android:layout_height="106dp"
+        android:layout_below="@+id/door_logo1"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/door_t"
+        android:contentDescription="TODO" />
+
+    <ImageView
+        android:id="@+id/door_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        app:srcCompat="@drawable/door_on" />
+
+</RelativeLayout>
