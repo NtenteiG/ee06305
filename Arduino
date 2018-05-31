@@ -28,10 +28,10 @@ void setup()
 
 //Αρχικοποίηση των ρελέ και των pins στα οποία είναι συνδεδεμένα πάνω στον μικροελεγκτή Arduino
 
-     pinMode(ac, OUTPUT);      // Ορίζουμε το pin 7 ώς pin εξόδου
+     pinMode(ac, OUTPUT);      // Ορίζουμε το pin 8 ώς pin εξόδου
      digitalWrite(ac, HIGH);
      
-     pinMode(lights, OUTPUT);   // Ορίζουμε το pin 8 ώς pin εξόδου
+     pinMode(lights, OUTPUT);   // Ορίζουμε το pin 7 ώς pin εξόδου
      digitalWrite(lights, HIGH);
      
      pinMode(tv, OUTPUT);       // Ορίζουμε το pin 9 ώς pin εξόδου
